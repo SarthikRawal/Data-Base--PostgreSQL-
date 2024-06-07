@@ -1,0 +1,46 @@
+Access PostgreSQL
+Switch to the PostgreSQL user and start the PostgreSQL prompt:
+> sudo -i -u postgres
+> psql
+
+DDL (Data Definition Language)
+DDL commands define and modify database schema.
+
+1. To create database
+> CREATE DATABASE mydatabase;
+
+2. to connect to the database
+> \c mydatabase
+
+3. To create table:
+> CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    position VARCHAR(50),
+    salary NUMERIC
+);
+
+4. To alter table
+> ALTER TABLE employees ADD COLUMN hire_date DATE;
+> ALTER TABLE employees DROP COLUMN hire_date;
+
+5. To drop table
+> DROP TABLE employees;
+
+DML (Data Manipulation Language)
+DML commands manipulate the data stored in the schema.
+
+1. Insert Data
+> INSERT INTO employees (name, position, salary) VALUES ('John Doe', 'Manager', 60000);
+
+2. Select data
+> SELECT * FROM employees;
+
+Retrieve specific columns:
+> SELECT name, position FROM employees;
+
+3. Update Data
+> UPDATE employees SET salary = 65000 WHERE name = 'John Doe';
+
+4. Delete Data
+> DELETE FROM employees WHERE name = 'John Doe';
