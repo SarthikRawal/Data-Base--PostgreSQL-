@@ -1,0 +1,45 @@
+Practical example that incorporates both DDL and DML commands:
+
+create data base
+> CREATE DATABASE company;
+
+create tables
+> CREATE TABLE departments (
+    dept_id SERIAL PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+> CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    position VARCHAR(50),
+    salary NUMERIC,
+    dept_id INTEGER REFERENCES departments(dept_id)
+);
+
+> CREATE TABLE project_assignments (
+    employee_id INTEGER,
+    project_id INTEGER,
+    assignment_date DATE,
+    PRIMARY KEY (employee_id, project_id),
+    FOREIGN KEY (employee_id) REFERENCES employees(id),
+    FOREIGN KEY (project_id) REFERENCES departments(dept_id)
+);
+
+> ALTER TABLE employees ADD column email UNIQUE;
+
+insert data
+> INSERT INTO departments (name) VALUES ('HR'), ('IT'), ('Sales');
+
+
+> INSERT INTO employees (email, name, position, salary, dept_id) VALUES
+('sarthik@xyz.com', 'Sarthik', 'HR Manager', 70000, 1),
+('rouanak@xyz.com', 'Rounak', 'IT Specialist', 80000, 2),
+('shubham@xyz.com','Shubham', 'Sales Executive', 75000, 3);
+
+queries
+> UPDATE employees SET salary = 85000 WHERE name = 'Sarthik';
+
+> SELECT e.name, e.position, d.department_name
+  FROM employees e
+  JOIN departments d ON e.dept_id = d.dept_id;
