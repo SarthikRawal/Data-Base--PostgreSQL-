@@ -1,0 +1,30 @@
+-- Create a new database
+CREATE DATABASE exampledb;
+
+-- Connect to the newly created database
+\c exampledb
+
+-- Create a table in the exampledb database
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    position VARCHAR(50),
+    salary NUMERIC
+);
+
+-- Create a new user
+CREATE USER newuser WITH PASSWORD 'password';
+
+-- Grant SELECT and INSERT privileges on the employees table to newuser
+GRANT SELECT, INSERT ON employees TO newuser;
+
+-- Verify that the privileges have been granted
+\dp employees
+
+-- Revoke SELECT and INSERT privileges on the employees table from newuser
+REVOKE SELECT, INSERT ON employees FROM newuser;
+
+-- Verify that the privileges have been revoked
+\dp employees
+
+
