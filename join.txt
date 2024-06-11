@@ -1,0 +1,52 @@
+JOIN in sql.
+
+1. Inner Join - returns records that have matching values in both tables.
+
+syntax:
+> SELECT column_name(s) 
+  FROM tableA
+  INNER JOIN tableB
+  ON tableA.col_name = tableB.col_name;
+
+> SELECT * FROM cutomers AS c
+  INNER JOIN payments AS p
+  ON c.customer_id = p.customer_id;
+  
+2. Left Join - return all the records from the left table and matching values from the right table
+
+syntax:
+> SELECT column_name(s)
+  FROM tableA
+  LEFT JOIN tableB
+  ON tableA.col_name = tableB.col_name;
+  
+> SELECT * 
+  FROM customer AS c
+  LEFT JOIN payments AS p
+  ON c.customer_id = p.customer_id;
+  
+3. Right Join - returns all the records from the right table and matching values from the left table
+
+syntax:
+> SELECT column_name(s)
+  FROM tableB
+  RIGHT JOIN tableA
+  ON tableb.col_name = tableA.col_name;\
+  
+> SELECT * 
+  FROM payments AS p
+  RIGHT JOIN customer AS c
+  ON p.customer_id = c.customer_id;
+  
+ 4. Full Join - returns all records when there is a match in either left or right table
+ 
+syntax:
+> SELECT *
+  FROM tableA
+  FULL OUTER JOIN tableB
+  ON tableA.col_name = tableB.col_name;
+  
+> SELECT *
+  FROM customer AS c
+  FULL OUTER JOIN payment AS p
+  ON c.customer_id = p.customer_id;
