@@ -50,3 +50,9 @@ syntax:
   FROM customer AS c
   FULL OUTER JOIN payment AS p
   ON c.customer_id = p.customer_id;
+
+5. Cross Join - Returns the Cartesian product of the two tables, i.e., all possible combinations of rows.
+
+> SELECT student.student_id, student.first_name, student.last_name, course.course_name
+  FROM student
+  CROSS JOIN course;
