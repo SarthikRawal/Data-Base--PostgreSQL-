@@ -32,28 +32,33 @@ The ROLLBACK TO SAVEPOINT command is used to undo changes up to the specified sa
 
 -- Example on using TCL commands
 
--- Start a new transaction
-BEGIN;
-
--- Insert a new employee
-INSERT INTO employees (name, department, salary) VALUES ('Alice Williams', 'HR', 50000);
-
--- Set a savepoint
-SAVEPOINT sp1;
-
--- Insert another employee
-INSERT INTO employees (name, department, salary) VALUES ('Bob Martin', 'Finance', 65000);
-
--- Set another savepoint
-SAVEPOINT sp2;
-
--- Update an employee's department
-UPDATE employees SET department = 'HR' WHERE name = 'Jane Smith';
-
--- Rollback to the second savepoint
-ROLLBACK TO SAVEPOINT sp2;
-
--- The update to 'Jane Smith' is undone, but 'Bob Martin' is still inserted
-
--- Commit the transaction
-COMMIT;
+postgres=# BEGIN;
+BEGIN
+postgres=*# INSERT into students VALUES(9, 'Radhika', 'MBA');
+INSERT 0 1
+postgres=*# SAVEPOINT sp1;
+SAVEPOINT
+postgres=*# INSERT into students VALUES(10, 'Meloni', 'Mcom');
+INSERT 0 1
+postgres=*# SAVEPOINT sp2;
+SAVEPOINT
+postgres=*# UPDATE students SET course = 'BBA' WHERE name = 'Radhika';
+UPDATE 1
+postgres=*# ROLLBACK TO SAVEPOINT sp2;
+ROLLBACK
+postgres=*# COMMIT;
+COMMIT
+postgres=# Select * from students;
+ roll |    name    | course 
+------+------------+--------
+    2 | Sarthik    | BCA
+    3 | Ronak      | MBA
+    4 | Sagar      | MCA
+    7 | Vishal     | MBA
+    1 | Saurabh    | MCA
+    8 | Sirisha    | Mcom
+    5 | Jaivardhan | Bcom
+    6 | Shobhit    | Bcom
+    9 | Radhika    | MBA
+   10 | Meloni     | Mcom
+(10 rows)
